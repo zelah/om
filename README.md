@@ -1,2 +1,1 @@
-# om
-OM(omnipotent,only macros) universal programming language
+om(omnipotent,only macros) universal programming language
