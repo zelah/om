@@ -1,3 +1,7 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+ 
 #define F1(type) typedef type (*type##f1)(type);
 #define F2(type) typedef type (*type##f2)(type,type);
 #define FOR PROFILE("\n_FOR_ ");for
@@ -10,7 +14,7 @@
 #define PROFILE0(string)
 #define PROFILE1(string) printf(string)
 #define RETURN(string,value) PROFILE("\n_RETURN_");PROFILE(string);PROFILE("_ ");return value
-#define RETURN_MAIN(value) PROFILE("\n_RETURN_MAIN_ ");RETURN_MAIN1(value)
+#define RETURN_MAIN(value) PROFILE("\n_RETURN_MAIN_ ");RETURN_MAIN0(value)
 #define RETURN_MAIN0(value) return value
 #define RETURN_MAIN1(value) if(value==0) return main();return value
 #define TYPEDEF typedef char CH;typedef signed char SCH;typedef unsigned char UCH;typedef short SH;typedef unsigned short USH;typedef int IN;typedef unsigned int UIN;typedef long LO;typedef unsigned long ULO;typedef long long LL;typedef unsigned long long ULL;typedef float FL;typedef double DB;typedef long double LD;
@@ -27,7 +31,7 @@
 #define CombineArrayWithFunctionAndFinalValue1(type) type type##CombineArrayWithFunctionAndFinalValue(type##p array,type##f2 function,type finalValue){ULL i;AssignVariableTheValue(i,0);WHILE(array[i]!=0){IncrementVariable(i);}DecrementVariable(i);AssignVariableTheValue(array[i],(*function)(array[i],finalValue));WHILE(i>0){AssignVariableTheValue(array[i-1],(*function)(array[i-1],array[i]));DecrementVariable(i);}RETURN("CombineArrayWithFunctionAndFinalValue",array[0]);}
 #define CopyString(string) CHpCopyString(string)
 #define CopyString0 CHp CHpCopyString(CHp string);
-#define CopyString1 CHp CHpCopyString(CHp string){CHp copy;ULL count;AssignVariableTheValue(count,strlen(string)+1);AssignVariableTheValue(copy,(CHp)malloc(count*sizeof(CH)));AssignVariableTheValue(count,0);WHILE(string[count]!=0){AssignVariableTheValue(copy[count],string[count]);IncrementVariable(count);}AssignVariableTheValue(copy[count],0);RETURN("CopyString",copy);}
+#define CopyString1 CHp CHpCopyString(CHp string){CHp copy;ULL count;AssignVariableTheValue(count,strlen(string)+1);AssignVariableTheValue(copy,(CHp)malloc(count*sizeof(CH)));AssignVariableTheValue(copy,strcpy(copy,string));RETURN("CopyString",copy);}
 #define DecrementVariable(variable) PROFILE("\n_DecrementVariable_ ");--variable
 #define ExampleCombineArrayWithTypeAndLengthAndFormatString(type,length,formatString){type##p array;AssignVariableTheValue(array,(type##p)malloc(sizeof(type)*(length+1)));ULL i;FOR(i=0;i<length;++i){AssignVariableTheValue(array[i],1);}AssignVariableTheValue(array[i],0);type##f2 function;AssignVariableTheValue(function,&type##AddNumberToNumber);type sum;AssignVariableTheValue(sum,type##CombineArrayWithFunctionAndFinalValue(array,function,0));PrintWithFormatStringAndValue(formatString,sum);RETURN_MAIN(0);}
 #define ExampleForLoopWithTypeAndStartAndStopAndFormatString(type,start,stop,formatString) {type i;FOR(i=start;i<=stop;++i){PrintString("hello: ");PrintWithFormatStringAndValue(formatString,i);PrintString("\n");}RETURN_MAIN(0);}
@@ -43,13 +47,15 @@
 #define PushWithValueAndList1(type) type##np type##PushWithValueAndList(type value,type##np list){type##np temp;AssignVariableTheValue(temp,(type##np)malloc(sizeof(type##n)));AssignVariableTheValue(temp->value,value);AssignVariableTheValue(temp->next,list);RETURN("PushWithValueAndList",temp);}
  
 TYPEDEF
-POINTER(ULL)
-F2(ULL)
+POINTER(CH)
+F1(CH)
  
-MAIN0(ExampleCombineArrayWithTypeAndLengthAndFormatString(ULL,10,"%llu"))
-AddNumberToNumber0(ULL)
-CombineArrayWithFunctionAndFinalValue0(ULL)
- 
-CombineArrayWithFunctionAndFinalValue1(ULL)
-AddNumberToNumber1(ULL)
-MAIN1(ExampleCombineArrayWithTypeAndLengthAndFormatString(ULL,10,"%llu"))
+MAIN0(ExampleString("HAL"))
+AddOneToNumber0(CH)
+CopyString0
+MapFunctionOverArray0(CH)
+
+MapFunctionOverArray1(CH)
+CopyString1
+AddOneToNumber1(CH)
+MAIN1(ExampleString("HAL"))
