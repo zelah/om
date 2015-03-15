@@ -1,1 +1,1 @@
-om(omnipotent,only macros) universal programming language
+om(on macros) universal programming language
